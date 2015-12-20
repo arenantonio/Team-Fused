@@ -1,0 +1,24 @@
+#include <SoftwareSerial.h>
+
+SoftwareSerial COMserial(10, 11); //receiver, sender
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(57600);
+while(!Serial){
+  //wait
+}
+Serial.println("Hello world!");
+COMserial.begin(4800);
+COMserial.println("Hello!");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+if(COMserial.available()){
+  Serial.write(COMserial.read());
+}
+if(Serial.available()){
+  COMserial.write(Serial.read());
+}
+}
